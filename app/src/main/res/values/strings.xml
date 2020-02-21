@@ -9,4 +9,13 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="texte_entree">Bonjour</string>
+    <string name="cycle_vie">Cycle de Vie</string>
+    <string name="save">Sauvegarde</string>
+    <string name="permission">Permission</string>
+    <string name="web_service">WebServices</string>
+    <string name="connexion_text">CONNEXION</string>
+    <string name="valider_button">VALIDER</string>
+    <string name="identifiant_login">Identifiant</string>
+    <string name="password">Mot de Passe</string>
 </resources>

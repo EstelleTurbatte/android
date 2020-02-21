@@ -7,11 +7,11 @@
     tools:context=".LoginActivity">
 
     <Button
-        android:id="@+id/valider"
+        android:id="@+id/valider_button"
         android:layout_width="119dp"
         android:layout_height="55dp"
         android:background="@android:color/holo_red_dark"
-        android:text="VALIDER"
+        android:text="@string/valider_button"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
         android:id="@+id/connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CONNEXION"
+        android:text="@string/connexion_text"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,5 +32,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.101" />
+
+    <ImageView
+        android:id="@+id/logoisen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connexion"
+        app:srcCompat="@drawable/logoisen"
+        android:importantForAccessibility="no"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="309dp"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/valider_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoisen">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/identifiant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/identifiant_login" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="304dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@+id/valider_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.325" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
