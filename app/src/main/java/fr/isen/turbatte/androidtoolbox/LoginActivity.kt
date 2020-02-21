@@ -1,5 +1,6 @@
 package fr.isen.turbatte.androidtoolbox
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,7 +26,10 @@ class LoginActivity : AppCompatActivity() {
             val userpassword = password.text.toString()
             if (userlogin == login && userpassword == mot_passe)
             {
-                Toast.makeText(this, "Identification réussie", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "Identification réussie", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+
             }else{
                 Toast.makeText(this, "Accès refusé", Toast.LENGTH_LONG).show()
             }
