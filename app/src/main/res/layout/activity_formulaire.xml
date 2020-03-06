@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormulaireActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nomUtilisateur"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13999999">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nomUtilisateur" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/prenomUtilisateur"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomUtilisateur"
+        app:layout_constraintVertical_bias="0.050000012">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/prenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prenomUtilisateur" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/envoyer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:background="@color/colorAccent"
+        android:text="@string/envoyer_button"
+        android:textColor="@android:color/background_light"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/pickDateBtn"
+        android:layout_width="97dp"
+        android:layout_height="39dp"
+        android:text="--/--/----"
+        app:layout_constraintBottom_toTopOf="@+id/envoyer_button"
+        app:layout_constraintEnd_toEndOf="@+id/prenomUtilisateur"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="@+id/prenomUtilisateur"
+        app:layout_constraintTop_toBottomOf="@+id/prenomUtilisateur"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <TextView
+        android:id="@+id/dateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dateUser"
+        app:layout_constraintEnd_toEndOf="@+id/pickDateBtn"
+        app:layout_constraintStart_toStartOf="@+id/pickDateBtn"
+        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

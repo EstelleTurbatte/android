@@ -18,4 +18,16 @@
     <string name="valider_button">VALIDER</string>
     <string name="identifiant_login">Identifiant</string>
     <string name="password">Mot de Passe</string>
+    <string name="etat_texte">etat</string>
+    <string name="etat_text" />
+    <string name="bonjour" />
+    <string name="Nom_input">NOM</string>
+    <string name="textInputNOM">NOM</string>
+    <string name="nomUtilisateur">NOM</string>
+    <string name="prenomUtilisateur">PRENOM</string>
+    <string name="dateUtilisateur" translatable="false">30/04/1997</string>
+    <string name="etatText">test</string>
+    <string name="etatTexte" />
+    <string name="envoyer_button">ENVOYER</string>
+    <string name="dateUser">Date :</string>
 </resources>
