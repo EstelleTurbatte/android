@@ -30,4 +30,7 @@
     <string name="etatTexte" />
     <string name="envoyer_button">ENVOYER</string>
     <string name="dateUser">Date :</string>
+    <string name="dateUsers" />
+    <string name="birthday">Date de Naissance</string>
+    <string name="showButton">Show !</string>
 </resources>

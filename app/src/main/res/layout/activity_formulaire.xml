@@ -57,11 +57,10 @@
         android:id="@+id/pickDateBtn"
         android:layout_width="97dp"
         android:layout_height="39dp"
+        android:layout_marginEnd="36dp"
         android:text="--/--/----"
         app:layout_constraintBottom_toTopOf="@+id/envoyer_button"
         app:layout_constraintEnd_toEndOf="@+id/prenomUtilisateur"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="@+id/prenomUtilisateur"
         app:layout_constraintTop_toBottomOf="@+id/prenomUtilisateur"
         app:layout_constraintVertical_bias="0.076" />
 
@@ -69,10 +68,35 @@
         android:id="@+id/dateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dateUser"
+        android:text="@string/dateUsers"
         app:layout_constraintEnd_toEndOf="@+id/pickDateBtn"
         app:layout_constraintStart_toStartOf="@+id/pickDateBtn"
         app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/birthday"
+        app:layout_constraintBottom_toTopOf="@+id/envoyer_button"
+        app:layout_constraintEnd_toStartOf="@+id/pickDateBtn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/prenomUtilisateur"
+        app:layout_constraintTop_toBottomOf="@+id/prenomUtilisateur"
+        app:layout_constraintVertical_bias="0.095" />
+
+    <Button
+        android:id="@+id/showButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:background="@color/colorAccent"
+        android:text="@string/showButton"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toTopOf="@+id/envoyer_button"
+        app:layout_constraintEnd_toEndOf="@+id/envoyer_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/envoyer_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
