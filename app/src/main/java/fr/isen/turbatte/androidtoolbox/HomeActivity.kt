@@ -32,5 +32,10 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, FormulaireActivity::class.java)
             startActivity(intent)
         }
+
+        permission_button.setOnClickListener{
+            val intent = Intent(this, PermissionActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

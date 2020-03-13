@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
     private fun goToHome() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("login", "estelle")
+        intent.putExtra("login", loginClair)
         startActivity(intent)
         finish()
     }

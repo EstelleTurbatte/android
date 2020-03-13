@@ -33,4 +33,6 @@
     <string name="dateUsers" />
     <string name="birthday">Date de Naissance</string>
     <string name="showButton">Show !</string>
+    <string name="accesTextView">Accès aux informations Android</string>
+    <string name="accesTextView2">Contact de</string>
 </resources>
