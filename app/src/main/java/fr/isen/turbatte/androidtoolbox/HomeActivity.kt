@@ -37,5 +37,10 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
+
+        webservice_button.setOnClickListener{
+            val intent = Intent(this, WebServiceActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
