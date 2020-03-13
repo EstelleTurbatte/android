@@ -22,39 +22,35 @@
         android:id="@+id/accesTextView2"
         android:layout_width="138dp"
         android:layout_height="21dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="68dp"
         android:text="@string/accesTextView2"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/photoUtilisateurView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/photoUtilisateurView"
-        app:layout_constraintTop_toBottomOf="@+id/accèsTextView" />
+        app:layout_constraintTop_toTopOf="@+id/photoUtilisateurView"
+        app:layout_constraintVertical_bias="0.515" />
 
     <ImageView
         android:id="@+id/photoUtilisateurView"
-        android:layout_width="96dp"
-        android:layout_height="87dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/accesTextView2"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.325"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accèsTextView"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
-    <HorizontalScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="409dp"
-        android:layout_height="562dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contactRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-    </HorizontalScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/photoUtilisateurView"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

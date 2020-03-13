@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    val loginClair = "estelle"
-    val motPasseClair = "estelle"
+    val loginClair = "admin"
+    val motPasseClair = "123"
     val KEY_LOGIN = "NOM"
     val KEY_PASSWORD = "pass"
     lateinit var sharedPreferences: SharedPreferences

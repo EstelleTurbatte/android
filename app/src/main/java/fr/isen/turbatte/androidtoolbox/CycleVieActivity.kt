@@ -34,5 +34,6 @@ class CycleVieActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("", "application -> onDestroy()")
+        Toast.makeText(this, "Destruction", Toast.LENGTH_SHORT).show()
     }
 }
