@@ -35,4 +35,11 @@
     <string name="showButton">Show !</string>
     <string name="accesTextView">Accès aux informations Android</string>
     <string name="accesTextView2">Contact de</string>
+    <string name="nothing" />
+    <string name="photo">picture you take</string>
+    <string name="userImageView">image of the user</string>
+    <string name="nameUserInput" />
+    <string name="userAddress" />
+    <string name="userMailAdress" />
+    <string name="bluetooth">bluetooth</string>
 </resources>

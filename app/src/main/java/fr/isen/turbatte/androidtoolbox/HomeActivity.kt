@@ -17,6 +17,9 @@ class HomeActivity : AppCompatActivity() {
         texteentree += login
         bonjour.text = texteentree
 
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("login", login)
+
 
         cycle_de_vie_button.setOnClickListener {
             val intent = Intent(this, CycleVieActivity::class.java)
@@ -40,6 +43,11 @@ class HomeActivity : AppCompatActivity() {
 
         webservice_button.setOnClickListener{
             val intent = Intent(this, WebServiceActivity::class.java)
+            startActivity(intent)
+        }
+
+        blutooht_button.setOnClickListener{
+            val intent = Intent(this, BluetoothActivity::class.java)
             startActivity(intent)
         }
     }

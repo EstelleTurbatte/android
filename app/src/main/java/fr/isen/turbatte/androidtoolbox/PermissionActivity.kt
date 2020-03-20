@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_home.*
@@ -20,21 +22,19 @@ import kotlinx.android.synthetic.main.activity_permission.*
 
 class PermissionActivity : AppCompatActivity() {
 
-    val contacts = mutableListOf<String>()
+    private val contacts = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission)
 
-        /*var texteentree:String = "Bonjour "
+       /* var texteentree:String = "Bonjour "
         val login:String = intent.getStringExtra("login")
         texteentree += login
         accesTextView2.text =texteentree*/
 
 
         photoUtilisateurView.setOnClickListener{
-            /*selectImageInAlbum()
-            takePhoto()*/
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
 
@@ -44,20 +44,20 @@ class PermissionActivity : AppCompatActivity() {
             pictureDialog.setItems(pictureDialogItems
             ) { dialog, which ->
                 when (which) {
-                    0 -> startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
-                    1 -> startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+                    0 -> selectImageInAlbum()
+                    1 -> takePhoto()
                 }
             }
             pictureDialog.show()
         }
 
-        /*contactRecycler.adapter = ContactAdapter(listOf("Julette", "Melvin"))
+        /*contactRecycler.adapter = ContactAdapter(listOf("Juliette", "Melvin"))
         contactRecycler.layoutManager = LinearLayoutManager(this)*/
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_PERMISSION)
             }else{
-            getContact()
+            getContacts()
             contactRecycler.adapter = ContactAdapter(contacts.sorted())
             contactRecycler.layoutManager = LinearLayoutManager(this)
         }
@@ -82,6 +82,7 @@ class PermissionActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM){
             photoUtilisateurView.setImageURI(data?.data) // handle chosen image
         }
@@ -93,26 +94,31 @@ class PermissionActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == REQUEST_PERMISSION)getContact()
+        if(requestCode == REQUEST_PERMISSION)getContacts()
     }
 
-    private fun getContact() {
-        val adapter = ContactAdapter(getContactData())
-        contactRecycler.adapter = adapter
-    }
 
-    private fun getContactData(): ArrayList<String> {
-        val contactList = ArrayList<String>()
-        val contactCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null, null, null, null)
 
-        if(contactCursor != null && contactCursor.count > 0){
-            while (contactCursor.moveToNext()){
-                val name = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                contacts.add(" Nom : $name")
+    private fun getContacts() {
+        val resolver: ContentResolver = contentResolver;
+        val cursor = resolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+
+        if (cursor != null && cursor.count > 0) {
+            while (cursor.moveToNext()) {
+                val name =
+                    cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                contacts.add("  Nom : $name")
             }
-            contactCursor.close()
+        } else {
+            Toast.makeText(applicationContext, "No contacts available!", Toast.LENGTH_SHORT).show()
         }
-    return contactList
+        cursor.close()
     }
 
 

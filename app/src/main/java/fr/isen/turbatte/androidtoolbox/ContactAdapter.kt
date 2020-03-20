@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_permission_cell.view.*
 
 class ContactAdapter(val contact: List<String>) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+
     class ContactViewHolder(contactView: View): RecyclerView.ViewHolder(contactView){
         val contactName: TextView = contactView.contactName
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder =
         ContactViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.activity_permission_cell, parent, false))
