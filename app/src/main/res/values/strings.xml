@@ -42,4 +42,6 @@
     <string name="userAddress" />
     <string name="userMailAdress" />
     <string name="bluetooth">bluetooth</string>
+    <string name="empty" />
+    <string name="distance">90</string>
 </resources>
