@@ -16,6 +16,7 @@ class BLEScanAdapter(
     val deviceClickListener: (BluetoothDevice) -> Unit
 ) :
     RecyclerView.Adapter<BLEScanAdapter.BLEScanViewHolder>() {
+
     class BLEScanViewHolder(
         scanView: View,
         private val scanResults: ArrayList<ScanResult>,
@@ -24,14 +25,15 @@ class BLEScanAdapter(
         RecyclerView.ViewHolder(scanView) {
 
         val distance: TextView = scanView.distanceTextView
-        val nameDevice: TextView = scanView.nameDeviceTextView
-        val MACAdress: TextView = scanView.MACAdressTextView
-        val layout = scanView.cellBleLayout
+        private val nameDevice: TextView = scanView.nameDeviceTextView
+        private val MACAdress: TextView = scanView.MACAdressTextView
+        private val layout = scanView.cellBleLayout
 
         fun pushInfo(position: Int) {
             distance.text = scanResults[position].rssi.toString()
             nameDevice.text = scanResults[position].device.name
             MACAdress.text = scanResults[position].device.address
+
             layout.setOnClickListener {
                 deviceClickListener.invoke(scanResults[position].device)
             }

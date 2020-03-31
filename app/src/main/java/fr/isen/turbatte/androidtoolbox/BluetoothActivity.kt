@@ -1,8 +1,6 @@
 package fr.isen.turbatte.androidtoolbox
 
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothManager
+import android.bluetooth.*
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.content.Context
@@ -21,13 +19,16 @@ class BluetoothActivity : AppCompatActivity() {
     private var lancerScan:String = "Lancer le Scan BLE"
     private var scanEnCours:String = "Scan BLE en cours"
     private var mScanning: Boolean = false
+    private var bluetoothGatt: BluetoothGatt? = null
     private lateinit var handler: Handler
     private lateinit var adapter: BLEScanAdapter
+
 
     private val bluetoothAdapter: BluetoothAdapter? by lazy(LazyThreadSafetyMode.NONE) {
         val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothManager.adapter
     }
+
 
     private val isBLEEnabled: Boolean
         get() = bluetoothAdapter?.isEnabled == true
@@ -54,7 +55,6 @@ class BluetoothActivity : AppCompatActivity() {
     }
 
     private fun initScan() {
-
         handler = Handler()
 
         adapter = BLEScanAdapter(arrayListOf(), ::onDeviceClicked)
@@ -111,6 +111,10 @@ class BluetoothActivity : AppCompatActivity() {
         super.onPause()
         if (isBLEEnabled) {
             scanLeDevice(false)
+            playPauseImageView.setImageResource(R.drawable.ic_play_arrow_black_24dp)
+            progressBar.visibility = View.GONE
+            DividerView.visibility = View.VISIBLE
+            laodingView.text = lancerScan
         }
     }
 
@@ -121,8 +125,7 @@ class BluetoothActivity : AppCompatActivity() {
     }
 
 
-    companion object {
-        private const val REQUEST_ENABLE_BT = 89
+    companion object {  private const val REQUEST_ENABLE_BT = 89
         private const val SCAN_PERIOD: Long = 10000
     }
 }

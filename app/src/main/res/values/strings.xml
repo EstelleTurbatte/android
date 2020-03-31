@@ -44,4 +44,8 @@
     <string name="bluetooth">bluetooth</string>
     <string name="empty" />
     <string name="distance">90</string>
+    <string name="LIRE">LIRE</string>
+    <string name="ECRITURE">ECRITURE</string>
+    <string name="LECTURE">LECTURE</string>
+    <string name="NOTIFICATION">NOTIFICATION</string>
 </resources>

@@ -10,17 +10,19 @@
         android:id="@+id/laodingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:text="@string/empty"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/playPauseImageView"
-        android:layout_width="50dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="124dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="32dp"
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="@+id/laodingView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,10 +37,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:indeterminate="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/laodingView"
-        android:indeterminate="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/playPauseImageView" />
 
     <View
         android:id="@+id/DividerView"
@@ -49,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/laodingView" />
+        app:layout_constraintTop_toBottomOf="@+id/playPauseImageView" />
 
     <TextView
         android:id="@+id/blefailedText"
