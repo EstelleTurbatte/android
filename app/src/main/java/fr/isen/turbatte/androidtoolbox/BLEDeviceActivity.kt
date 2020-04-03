@@ -1,9 +1,6 @@
 package fr.isen.turbatte.androidtoolbox
 
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothGatt
-import android.bluetooth.BluetoothGattCallback
-import android.bluetooth.BluetoothProfile
+import android.bluetooth.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -67,6 +64,8 @@ class BLEDeviceActivity : AppCompatActivity() {
                         statutDeviceTextView.text = STATE_CONNECTED
                     }
                     gatt?.discoverServices()
+                }else{
+                    statutDeviceTextView.text = STATE_DISCONNECTED
                 }
             }
 
@@ -79,7 +78,12 @@ class BLEDeviceActivity : AppCompatActivity() {
                             it.uuid.toString(),
                             it.characteristics
                         )
-                    }?.toMutableList() ?: arrayListOf()
+                    }?.toMutableList() ?: arrayListOf(), this@BLEDeviceActivity
+                        /*{ characteristic -> gatt?.readCharacteristic((characteristic))},
+                        { charactristic -> writeIntoCharacterisitic(gatt, charactristic)},
+                        { characterisitic, enable ->
+                            toggleNotificationOnCharacteristic(gatt, characterisitic, enable)
+                        }*/
                     )
                     bleDeviceRecyclerView.layoutManager = LinearLayoutManager(this@BLEDeviceActivity)
                 }
@@ -87,6 +91,16 @@ class BLEDeviceActivity : AppCompatActivity() {
             }
         })
         bluetoothGatt?.connect()
+    }
+
+    private fun toggleNotificationOnCharacteristic(
+        gatt: BluetoothGatt,
+        characterisitic: BluetoothGattCharacteristic,
+        enable: Boolean
+    ){
+        characterisitic.descriptors.forEach {
+
+        }
     }
 
     override fun onStop() {

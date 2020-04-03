@@ -10,14 +10,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_web_service_cell.view.*
+import kotlinx.android.synthetic.main.activity_web_user.view.*
 
-class WebAdapter(private val randomUser: User, val context: Context) : RecyclerView.Adapter<WebAdapter.WebViewHolder>() {
+class WebAdapter(
+    private val randomUser: User,
+    val context: Context,
+    val peopleClickListener: (User) -> Unit
+) : RecyclerView.Adapter<WebAdapter.WebViewHolder>() {
 
-    class WebViewHolder(webView: View, private val randomUser: User, val context: Context): RecyclerView.ViewHolder(webView){
-        val nameUser: TextView = webView.nameUser
-        val userAdress: TextView = webView.userAddress
-        val userMailAdres: TextView = webView.userMailAdress
-        val picture: ImageView = webView.userImageView
+    class WebViewHolder(
+        webView: View,
+        private val randomUser: User,
+        val context: Context,
+        val peopleClickListener: (User) -> Unit
+    ):
+        RecyclerView.ViewHolder(webView){
+
+        private val nameUser: TextView = webView.nameUser
+        private val userAdress: TextView = webView.userAddress
+        private val userMailAdres: TextView = webView.userMailAdress
+        private val picture: ImageView = webView.userImageView
+        private val layout = webView.userLayout
 
         fun pushInfo(position: Int){
             val nomUser = randomUser.results[position].name.first + "" + randomUser.results[position].name.last
@@ -32,13 +45,18 @@ class WebAdapter(private val randomUser: User, val context: Context) : RecyclerV
             nameUser.text = nomUser
             userAdress.text = adresse
             userMailAdres.text = email
+
+
+            layout.setOnClickListener {
+                peopleClickListener.invoke(randomUser)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WebViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.activity_web_service_cell, parent, false)
-        return WebViewHolder(view, randomUser, context)
+        return WebViewHolder(view, randomUser, context, peopleClickListener)
     }
 
     override fun getItemCount(): Int = randomUser.results.size

@@ -1,5 +1,6 @@
 package fr.isen.turbatte.androidtoolbox
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -37,7 +38,7 @@ class WebServiceActivity : AppCompatActivity() {
             Response.Listener<String> { response ->
                 val gson = GsonBuilder().create()
                 jsonString = gson.fromJson(response.toString(), User::class.java)
-                webRecycler.adapter = WebAdapter(jsonString, this)
+                webRecycler.adapter = WebAdapter(jsonString, this, ::onPeopleClicked)
                 webRecycler.layoutManager = LinearLayoutManager(this)
                 webRecycler.visibility = View.VISIBLE
 
@@ -47,5 +48,11 @@ class WebServiceActivity : AppCompatActivity() {
         queue.add(stringRequest)
         return jsonString
 
+    }
+
+    private fun onPeopleClicked(people: User) {
+        val intent = Intent(this, WebUserActivity::class.java)
+        intent.putExtra("People", people)
+        startActivity(intent)
     }
 }

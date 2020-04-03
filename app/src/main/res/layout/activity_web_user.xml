@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/userLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WebUserActivity">
+
+    <ImageView
+        android:id="@+id/pictureImageView"
+        android:layout_width="186dp"
+        android:layout_height="182dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/nomTitreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/nomTitreTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/nomFirstTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/nomFirstTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/nomTitreTextView"
+        app:layout_constraintEnd_toStartOf="@+id/nomLastTextView"
+        app:layout_constraintStart_toEndOf="@+id/nomTitreTextView"
+        app:layout_constraintTop_toTopOf="@+id/nomTitreTextView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/nomLastTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/nomLastTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/nomFirstTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nomFirstTextView" />
+
+    <TextView
+        android:id="@+id/locationStreetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/locationCityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/locationCityTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/locationStreetTextView"
+        app:layout_constraintEnd_toStartOf="@+id/locationStateTextView"
+        app:layout_constraintStart_toEndOf="@+id/locationStreetTextView"
+        app:layout_constraintTop_toTopOf="@+id/locationStreetTextView" />
+
+    <TextView
+        android:id="@+id/locationStateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/locationStateTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/locationCityTextView"
+        app:layout_constraintEnd_toStartOf="@+id/locationPostCodeTextView"
+        app:layout_constraintTop_toTopOf="@+id/locationCityTextView" />
+
+    <TextView
+        android:id="@+id/locationPostCodeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/locationPostCodeTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/locationStateTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/locationStateTextView" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/IDENTITE"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pictureImageView" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/ADRESSE"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DOBTextView" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/COORDONNEES"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationStreetTextView" />
+
+    <TextView
+        android:id="@+id/DOBTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/DOBTextView"
+        app:layout_constraintEnd_toEndOf="@+id/nomTitreTextView"
+        app:layout_constraintStart_toStartOf="@+id/nomTitreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/nomTitreTextView" />
+
+    <TextView
+        android:id="@+id/ageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ageTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/DOBTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/DOBTextView"
+        app:layout_constraintTop_toTopOf="@+id/DOBTextView" />
+
+    <TextView
+        android:id="@+id/eMailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/eMailTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/phoneTtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phoneTtextView"
+        app:layout_constraintBottom_toBottomOf="@+id/eMailTextView"
+        app:layout_constraintEnd_toStartOf="@+id/cellTextView"
+        app:layout_constraintStart_toEndOf="@+id/eMailTextView"
+        app:layout_constraintTop_toTopOf="@+id/eMailTextView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/cellTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/cellTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneTtextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/phoneTtextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BLEDeviceActivity"></activity>
+        <activity android:name=".WebUserActivity"></activity>
+        <activity android:name=".BLEDeviceActivity" />
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".WebServiceActivity" />
         <activity android:name=".PermissionActivity" />
