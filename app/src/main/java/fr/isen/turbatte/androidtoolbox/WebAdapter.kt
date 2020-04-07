@@ -15,14 +15,14 @@ import kotlinx.android.synthetic.main.activity_web_user.view.*
 class WebAdapter(
     private val randomUser: User,
     val context: Context,
-    val peopleClickListener: (User) -> Unit
+    private val peopleClickListener: (Results) -> Unit
 ) : RecyclerView.Adapter<WebAdapter.WebViewHolder>() {
 
     class WebViewHolder(
         webView: View,
         private val randomUser: User,
         val context: Context,
-        val peopleClickListener: (User) -> Unit
+        private val peopleClickListener: (Results) -> Unit
     ):
         RecyclerView.ViewHolder(webView){
 
@@ -30,7 +30,7 @@ class WebAdapter(
         private val userAdress: TextView = webView.userAddress
         private val userMailAdres: TextView = webView.userMailAdress
         private val picture: ImageView = webView.userImageView
-        private val layout = webView.userLayout
+        private val layoutUser = webView.userlayout
 
         fun pushInfo(position: Int){
             val nomUser = randomUser.results[position].name.first + "" + randomUser.results[position].name.last
@@ -46,9 +46,8 @@ class WebAdapter(
             userAdress.text = adresse
             userMailAdres.text = email
 
-
-            layout.setOnClickListener {
-                peopleClickListener.invoke(randomUser)
+            layoutUser.setOnClickListener {
+                peopleClickListener.invoke(randomUser.results[position])
             }
         }
     }

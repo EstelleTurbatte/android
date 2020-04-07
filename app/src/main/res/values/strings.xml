@@ -73,4 +73,5 @@
     <string name="eMailTextView">E-MAIL</string>
     <string name="phoneTtextView">PHONE</string>
     <string name="cellTextView">CELL</string>
+    <string name="STREET">STREET</string>
 </resources>

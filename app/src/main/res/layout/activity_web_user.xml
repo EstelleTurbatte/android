@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/userLayout"
+    android:id="@+id/webUserLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WebUserActivity">
 
     <ImageView
         android:id="@+id/pictureImageView"
-        android:layout_width="186dp"
-        android:layout_height="182dp"
+        android:layout_width="315dp"
+        android:layout_height="315dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,6 @@
         android:layout_marginStart="8dp"
         android:text="@string/nomFirstTextView"
         app:layout_constraintBottom_toBottomOf="@+id/nomTitreTextView"
-        app:layout_constraintEnd_toStartOf="@+id/nomLastTextView"
         app:layout_constraintStart_toEndOf="@+id/nomTitreTextView"
         app:layout_constraintTop_toTopOf="@+id/nomTitreTextView"
         app:layout_constraintVertical_bias="0.0" />
@@ -47,6 +46,8 @@
         android:text="@string/nomLastTextView"
         app:layout_constraintBottom_toBottomOf="@+id/nomFirstTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toEndOf="@+id/nomFirstTextView"
         app:layout_constraintTop_toTopOf="@+id/nomFirstTextView" />
 
     <TextView
@@ -55,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/STREET"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -63,10 +64,9 @@
         android:id="@+id/locationCityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:text="@string/locationCityTextView"
         app:layout_constraintBottom_toBottomOf="@+id/locationStreetTextView"
-        app:layout_constraintEnd_toStartOf="@+id/locationStateTextView"
         app:layout_constraintStart_toEndOf="@+id/locationStreetTextView"
         app:layout_constraintTop_toTopOf="@+id/locationStreetTextView" />
 
@@ -74,10 +74,10 @@
         android:id="@+id/locationStateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
         android:text="@string/locationStateTextView"
         app:layout_constraintBottom_toBottomOf="@+id/locationCityTextView"
-        app:layout_constraintEnd_toStartOf="@+id/locationPostCodeTextView"
+        app:layout_constraintStart_toEndOf="@+id/locationCityTextView"
         app:layout_constraintTop_toTopOf="@+id/locationCityTextView" />
 
     <TextView
@@ -88,6 +88,8 @@
         android:text="@string/locationPostCodeTextView"
         app:layout_constraintBottom_toBottomOf="@+id/locationStateTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/locationStateTextView"
         app:layout_constraintTop_toTopOf="@+id/locationStateTextView" />
 
     <TextView
@@ -107,14 +109,14 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/ADRESSE"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DOBTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/nomTitreTextView" />
 
     <TextView
         android:id="@+id/textView12"
@@ -130,26 +132,6 @@
         app:layout_constraintTop_toBottomOf="@+id/locationStreetTextView" />
 
     <TextView
-        android:id="@+id/DOBTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/DOBTextView"
-        app:layout_constraintEnd_toEndOf="@+id/nomTitreTextView"
-        app:layout_constraintStart_toStartOf="@+id/nomTitreTextView"
-        app:layout_constraintTop_toBottomOf="@+id/nomTitreTextView" />
-
-    <TextView
-        android:id="@+id/ageTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ageTextView"
-        app:layout_constraintBottom_toBottomOf="@+id/DOBTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/DOBTextView"
-        app:layout_constraintTop_toTopOf="@+id/DOBTextView" />
-
-    <TextView
         android:id="@+id/eMailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -159,24 +141,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <TextView
-        android:id="@+id/phoneTtextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/phoneTtextView"
-        app:layout_constraintBottom_toBottomOf="@+id/eMailTextView"
-        app:layout_constraintEnd_toStartOf="@+id/cellTextView"
-        app:layout_constraintStart_toEndOf="@+id/eMailTextView"
-        app:layout_constraintTop_toTopOf="@+id/eMailTextView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/cellTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="@string/cellTextView"
-        app:layout_constraintBottom_toBottomOf="@+id/phoneTtextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/phoneTtextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

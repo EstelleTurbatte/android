@@ -1,10 +1,12 @@
 package fr.isen.turbatte.androidtoolbox
 
 import android.app.AlertDialog
+import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +25,8 @@ import okio.Utf8.size
 
 class BLEServiceAdapter(
     private val serviceList: MutableList<BLEService>,
-    val context: Context
+    val context: Context,
+    private val gatt: BluetoothGatt?
     /*private val readCharacteristic: (BluetoothGattCharacteristic) -> Unit,
     private val writeCharacteristic: (BluetoothGattCharacteristic) -> Unit,
     private val notifyCharacteristic: (BluetoothGattCharacteristic) -> Unit*/
@@ -116,8 +119,8 @@ class BLEServiceAdapter(
         }
 
         holder.characteristicPropreties.text = currentPropriete
-        var value: String = ""
-        //var test: ByteArray = 00
+        val value: String = ""
+        var valeur: ByteArray = value.toByteArray()
 
         holder.WriteAction.setOnClickListener {
             val builder = AlertDialog.Builder(context)
@@ -127,35 +130,41 @@ class BLEServiceAdapter(
             builder.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, which ->  })
             builder.setPositiveButton("Ecrire", DialogInterface.OnClickListener {
                     _, _ ->
-                value =  editView.valeurInputText.text.toString()
-                //test = editView.valeurInputText.toString().toByteArray(Charsets.UTF_8)
-                //val text = "valeur envoyée :  $value $test"
-                //holder.characteristicValueSend.text = text
+
+                valeur  = editView.valeurInputText.text.toString().toByteArray(Charsets.UTF_8)
+                val test = String(valeur)
+                val text = "valeur envoyée :  $test"
+                holder.characteristicValueSend.text = text
+                characteristic.setValue(valeur)
+
+                val verif1 = gatt?.writeCharacteristic(characteristic)
+                Log.i("erreur écriture: ", verif1.toString())
+
+                val verif2= gatt?.readCharacteristic(characteristic)
+                Log.i("erreur Lecture: ", verif2.toString())
             })
             builder.show()
         }
 
-        //characteristic.value = json.toString().toByteArray()
+        //characteristic.value = valeur
 
         holder.ReadAction.setOnClickListener {
-            //test = test.plus(1)
-            //val reponse = String(test, Charsets.UTF_8)
-            //val text = "valeur reçue : $test"
-            //holder.characteristicValueReceived.text = reponse
+            val verif = gatt?.readCharacteristic(characteristic)
+            Log.i("erreur Lecture: ", verif.toString())
+
+            val reception = String(characteristic.value)
+            holder.characteristicValueReceived.text = "valeur recue : $reception"
         }
 
         holder.NotificationAction.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
-            val editView = View.inflate(context, R.layout.alert_dialog_builder_bluetooth, null)
-            builder.setView(editView)
-            builder.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, which ->  })
-            builder.setPositiveButton("Notifier", DialogInterface.OnClickListener {
-                    _, _ ->
-                val text = editView.valeurInputText.text.toString()
-                characteristic.setValue(text)
-            })
-            builder.show()
+            characteristic.descriptors.forEach {
+                if (characteristic.value != null) {
+                    val reception = String(characteristic.value)
+                    holder.characteristicValueReceived.text = "valeur recue : $reception"
+                }
+            }
         }
+
     }
 
     override fun onBindGroupViewHolder(

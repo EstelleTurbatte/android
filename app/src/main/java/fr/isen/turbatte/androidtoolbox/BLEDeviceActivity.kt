@@ -78,12 +78,8 @@ class BLEDeviceActivity : AppCompatActivity() {
                             it.uuid.toString(),
                             it.characteristics
                         )
-                    }?.toMutableList() ?: arrayListOf(), this@BLEDeviceActivity
-                        /*{ characteristic -> gatt?.readCharacteristic((characteristic))},
-                        { charactristic -> writeIntoCharacterisitic(gatt, charactristic)},
-                        { characterisitic, enable ->
-                            toggleNotificationOnCharacteristic(gatt, characterisitic, enable)
-                        }*/
+                    }?.toMutableList() ?: arrayListOf(), this@BLEDeviceActivity, gatt
+
                     )
                     bleDeviceRecyclerView.layoutManager = LinearLayoutManager(this@BLEDeviceActivity)
                 }
@@ -93,15 +89,6 @@ class BLEDeviceActivity : AppCompatActivity() {
         bluetoothGatt?.connect()
     }
 
-    private fun toggleNotificationOnCharacteristic(
-        gatt: BluetoothGatt,
-        characterisitic: BluetoothGattCharacteristic,
-        enable: Boolean
-    ){
-        characterisitic.descriptors.forEach {
-
-        }
-    }
 
     override fun onStop() {
         super.onStop()

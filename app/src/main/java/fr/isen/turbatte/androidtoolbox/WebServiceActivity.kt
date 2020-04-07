@@ -50,7 +50,7 @@ class WebServiceActivity : AppCompatActivity() {
 
     }
 
-    private fun onPeopleClicked(people: User) {
+    private fun onPeopleClicked(people: Results) {
         val intent = Intent(this, WebUserActivity::class.java)
         intent.putExtra("People", people)
         startActivity(intent)

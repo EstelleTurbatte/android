@@ -1,7 +1,9 @@
 package fr.isen.turbatte.androidtoolbox
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-class User : Serializable {
+@Parcelize
+class User() : Parcelable {
     val results: ArrayList<Results> = ArrayList()
 }

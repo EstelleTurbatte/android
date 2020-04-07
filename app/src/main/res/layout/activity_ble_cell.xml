@@ -15,7 +15,6 @@
         android:layout_marginTop="54dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/border"
-        android:backgroundTint="@color/colorAccent"
         android:gravity="center"
         android:text="@string/distance"
         android:textAlignment="center"

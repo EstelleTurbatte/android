@@ -53,11 +53,11 @@ class BLEScanAdapter(
         val distance = scanResults[position].rssi
 
         if (distance < -80) {
-            holder.distance.setBackgroundColor(Color.parseColor("#EC1515"))
+            holder.distance.setBackgroundColor(Color.parseColor("#FFAAAA"))
         } else if (distance >= -80 && distance < -60) {
-            holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#EE4747"))
+            holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#F05A5A"))
         } else if (distance > -40) {
-            holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#F37979"))
+            holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#EE4747"))
         }
 }
 
