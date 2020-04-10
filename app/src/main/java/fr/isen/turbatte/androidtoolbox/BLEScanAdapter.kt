@@ -57,17 +57,17 @@ class BLEScanAdapter(
         } else if (distance >= -80 && distance < -60) {
             holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#F05A5A"))
         } else if (distance > -40) {
-            holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#EE4747"))
+            holder.distance.distanceTextView.setBackgroundColor(Color.parseColor("#E16969"))
         }
-}
-
-fun addDeviceToList(result: ScanResult) {
-    val index = scanResults.indexOfFirst { it.device.address == result.device.address }
-    if (index != -1) {
-        scanResults[index] = result
-    } else {
-        scanResults.add(result)
     }
-}
+
+    fun addDeviceToList(result: ScanResult) {
+        val index = scanResults.indexOfFirst { it.device.address == result.device.address }
+        if (index != -1) {
+            scanResults[index] = result
+        } else {
+            scanResults.add(result)
+        }
+    }
 }
 

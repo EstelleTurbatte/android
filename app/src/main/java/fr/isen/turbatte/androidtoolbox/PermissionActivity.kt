@@ -28,20 +28,16 @@ class PermissionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission)
 
-       /* var texteentree:String = "Bonjour "
-        val login:String = intent.getStringExtra("login")
-        texteentree += login
-        accesTextView2.text =texteentree*/
-
-
-        photoUtilisateurView.setOnClickListener{
+        photoUtilisateurView.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
 
             val pictureDialog = AlertDialog.Builder(this)
             pictureDialog.setTitle("Select Action")
-            val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
-            pictureDialog.setItems(pictureDialogItems
+            val pictureDialogItems =
+                arrayOf("Select photo from gallery", "Capture photo from camera")
+            pictureDialog.setItems(
+                pictureDialogItems
             ) { dialog, which ->
                 when (which) {
                     0 -> selectImageInAlbum()
@@ -54,9 +50,17 @@ class PermissionActivity : AppCompatActivity() {
         /*contactRecycler.adapter = ContactAdapter(listOf("Juliette", "Melvin"))
         contactRecycler.layoutManager = LinearLayoutManager(this)*/
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_PERMISSION)
-            }else{
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_CONTACTS),
+                REQUEST_PERMISSION
+            )
+        } else {
             getContacts()
             contactRecycler.adapter = ContactAdapter(contacts.sorted())
             contactRecycler.layoutManager = LinearLayoutManager(this)
@@ -69,6 +73,7 @@ class PermissionActivity : AppCompatActivity() {
         intent.type = "image/*"
         startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
     }
+
     private fun takePhoto() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intent, REQUEST_TAKE_PHOTO)
@@ -83,7 +88,7 @@ class PermissionActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM){
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM) {
             photoUtilisateurView.setImageURI(data?.data) // handle chosen image
         }
     }
@@ -94,9 +99,8 @@ class PermissionActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == REQUEST_PERMISSION)getContacts()
+        if (requestCode == REQUEST_PERMISSION) getContacts()
     }
-
 
 
     private fun getContacts() {

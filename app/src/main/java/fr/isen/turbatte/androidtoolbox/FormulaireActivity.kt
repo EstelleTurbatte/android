@@ -43,7 +43,7 @@ class FormulaireActivity : AppCompatActivity() {
             val userPrenom = prenom.text.toString()
             val userDate = dateUser.text.toString()
             val answer = JSONObject()
-            
+
             val path = filesDir.absolutePath + "fichier.json"
 
             answer.put(KEY_LOGIN, userNom)
@@ -62,8 +62,11 @@ class FormulaireActivity : AppCompatActivity() {
 
                 builder.setTitle("Personne enregistrée")
                 builder.setMessage(
-                    "Nom : " + test.get(KEY_LOGIN).toString() + "\nPrénom : " + test.get(KEY_PASSWORD).toString() + "\nDate de Naissance : "
-                            + test.get(KEY_DATE).toString()+ "\nAge : " +age +" ans")
+                    "Nom : " + test.get(KEY_LOGIN).toString() + "\nPrénom : " + test.get(
+                        KEY_PASSWORD
+                    ).toString() + "\nDate de Naissance : "
+                            + test.get(KEY_DATE).toString() + "\nAge : " + age + " ans"
+                )
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
             }
@@ -82,7 +85,6 @@ class FormulaireActivity : AppCompatActivity() {
 
 
     private fun getAge(dob: Calendar): Int? {
-        //val dob = Calendar.getInstance()
         val today = Calendar.getInstance()
 
         val year = dob.get(Calendar.YEAR)

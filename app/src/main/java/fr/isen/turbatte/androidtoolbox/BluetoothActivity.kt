@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_bluetooth.*
 
 class BluetoothActivity : AppCompatActivity() {
 
-    private var lancerScan:String = "Lancer le Scan BLE"
-    private var scanEnCours:String = "Scan BLE en cours"
+    private var lancerScan: String = "Lancer le Scan BLE"
+    private var scanEnCours: String = "Scan BLE en cours"
     private var mScanning: Boolean = false
     private var bluetoothGatt: BluetoothGatt? = null
     private lateinit var handler: Handler
@@ -61,7 +61,7 @@ class BluetoothActivity : AppCompatActivity() {
         bleRecyclerView.adapter = adapter
         bleRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        playPauseImageView.setOnClickListener{scanLeDevice(true)}
+        playPauseImageView.setOnClickListener { scanLeDevice(true) }
     }
 
     private fun scanLeDevice(enable: Boolean) {
@@ -125,7 +125,8 @@ class BluetoothActivity : AppCompatActivity() {
     }
 
 
-    companion object {  private const val REQUEST_ENABLE_BT = 89
+    companion object {
+        private const val REQUEST_ENABLE_BT = 89
         private const val SCAN_PERIOD: Long = 10000
     }
 }

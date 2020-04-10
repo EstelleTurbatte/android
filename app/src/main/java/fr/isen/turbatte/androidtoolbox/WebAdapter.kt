@@ -23,8 +23,8 @@ class WebAdapter(
         private val randomUser: User,
         val context: Context,
         private val peopleClickListener: (Results) -> Unit
-    ):
-        RecyclerView.ViewHolder(webView){
+    ) :
+        RecyclerView.ViewHolder(webView) {
 
         private val nameUser: TextView = webView.nameUser
         private val userAdress: TextView = webView.userAddress
@@ -32,9 +32,11 @@ class WebAdapter(
         private val picture: ImageView = webView.userImageView
         private val layoutUser = webView.userlayout
 
-        fun pushInfo(position: Int){
-            val nomUser = randomUser.results[position].name.first + "" + randomUser.results[position].name.last
-            val adresse =randomUser.results[position].location.street.number.toString() + " " + randomUser.results[position].location.street.name + "" + randomUser.results[position].location.city + "" + randomUser.results[position].location.state
+        fun pushInfo(position: Int) {
+            val nomUser =
+                randomUser.results[position].name.first + "  " + randomUser.results[position].name.last
+            val adresse =
+                randomUser.results[position].location.street.number.toString() + " " + randomUser.results[position].location.street.name + " " + randomUser.results[position].location.city + " " + randomUser.results[position].location.state
             val email = randomUser.results[position].email
 
             Picasso.get()

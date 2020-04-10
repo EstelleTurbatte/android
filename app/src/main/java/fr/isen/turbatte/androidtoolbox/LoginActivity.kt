@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         logOut()
     }
 
-    private fun saveCredential(id: String, pass:String){
+    private fun saveCredential(id: String, pass: String) {
         val editor = sharedPreferences.edit()
         editor.putString(KEY_LOGIN, id)
         editor.putString(KEY_PASSWORD, pass)
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun logOut(){
+    private fun logOut() {
         val editor = sharedPreferences.edit()
         editor.remove(KEY_LOGIN)
         editor.remove(KEY_PASSWORD)

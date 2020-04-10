@@ -12,8 +12,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        var texteentree:String = "Bonjour "
-        val login:String = intent.getStringExtra("login")
+        var texteentree: String = "Bonjour "
+        val login: String = intent.getStringExtra("login")
         texteentree += login
         bonjour.text = texteentree
 
@@ -26,27 +26,27 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        deconnexion_button.setOnClickListener{
+        deconnexion_button.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        sauvegarde_button.setOnClickListener{
+        sauvegarde_button.setOnClickListener {
             val intent = Intent(this, FormulaireActivity::class.java)
             startActivity(intent)
         }
 
-        permission_button.setOnClickListener{
+        permission_button.setOnClickListener {
             val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
 
-        webservice_button.setOnClickListener{
+        webservice_button.setOnClickListener {
             val intent = Intent(this, WebServiceActivity::class.java)
             startActivity(intent)
         }
 
-        blutooht_button.setOnClickListener{
+        blutooht_button.setOnClickListener {
             val intent = Intent(this, BluetoothActivity::class.java)
             startActivity(intent)
         }

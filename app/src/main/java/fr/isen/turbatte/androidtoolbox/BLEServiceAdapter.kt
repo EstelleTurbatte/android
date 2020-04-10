@@ -3,6 +3,7 @@ package fr.isen.turbatte.androidtoolbox
 import android.app.AlertDialog
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
+import android.bluetooth.BluetoothGattDescriptor
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
@@ -27,13 +29,11 @@ class BLEServiceAdapter(
     private val serviceList: MutableList<BLEService>,
     val context: Context,
     private val gatt: BluetoothGatt?
-    /*private val readCharacteristic: (BluetoothGattCharacteristic) -> Unit,
-    private val writeCharacteristic: (BluetoothGattCharacteristic) -> Unit,
-    private val notifyCharacteristic: (BluetoothGattCharacteristic) -> Unit*/
 ) :
     ExpandableRecyclerViewAdapter<BLEServiceAdapter.ServiceViewHolder, BLEServiceAdapter.CharasteristicViewHolder>(
         serviceList
     ) {
+
 
     class ServiceViewHolder(itemView: View) : GroupViewHolder(itemView) {
         val serviceName: TextView = itemView.serviceNameTextView
@@ -105,15 +105,15 @@ class BLEServiceAdapter(
         val propriete = characteristic.properties
         var currentPropriete: String = "Propriétés : "
 
-        if (getProperties(propriete).contains("WRITE")){
+        if (getProperties(propriete).contains("WRITE")) {
             holder.WriteAction.setBackgroundColor(Color.parseColor("#F10B0B"))
             currentPropriete += " Ecriture"
         }
-        if (getProperties(propriete).contains("READ")){
+        if (getProperties(propriete).contains("READ")) {
             holder.ReadAction.setBackgroundColor(Color.parseColor("#F10B0B"))
             currentPropriete += " Lecture"
         }
-        if (getProperties(propriete).contains("NOTIFY")){
+        if (getProperties(propriete).contains("NOTIFY")) {
             holder.NotificationAction.setBackgroundColor(Color.parseColor("#F10B0B"))
             currentPropriete += " Notifier"
         }
@@ -127,11 +127,12 @@ class BLEServiceAdapter(
             val editView = View.inflate(context, R.layout.alert_dialog_builder_bluetooth, null)
             builder.setView(editView)
             builder.setTitle("ECRITURE")
-            builder.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, which ->  })
-            builder.setPositiveButton("Ecrire", DialogInterface.OnClickListener {
-                    _, _ ->
+            builder.setNegativeButton(
+                "Annuler",
+                DialogInterface.OnClickListener { _, _ -> })
+            builder.setPositiveButton("Ecrire", DialogInterface.OnClickListener { _, _ ->
 
-                valeur  = editView.valeurInputText.text.toString().toByteArray(Charsets.UTF_8)
+                valeur = editView.valeurInputText.text.toString().toByteArray(Charsets.UTF_8)
                 val test = String(valeur)
                 val text = "valeur envoyée :  $test"
                 holder.characteristicValueSend.text = text
@@ -140,32 +141,73 @@ class BLEServiceAdapter(
                 val verif1 = gatt?.writeCharacteristic(characteristic)
                 Log.i("erreur écriture: ", verif1.toString())
 
-                val verif2= gatt?.readCharacteristic(characteristic)
+                val verif2 = gatt?.readCharacteristic(characteristic)
                 Log.i("erreur Lecture: ", verif2.toString())
             })
             builder.show()
         }
-
-        //characteristic.value = valeur
 
         holder.ReadAction.setOnClickListener {
             val verif = gatt?.readCharacteristic(characteristic)
             Log.i("erreur Lecture: ", verif.toString())
 
             val reception = String(characteristic.value)
-            holder.characteristicValueReceived.text = "valeur recue : $reception"
+            val valeurRecue = "valeur recue : $reception"
+            holder.characteristicValueReceived.text = valeurRecue
         }
 
         holder.NotificationAction.setOnClickListener {
-            characteristic.descriptors.forEach {
-                if (characteristic.value != null) {
-                    val reception = String(characteristic.value)
-                    holder.characteristicValueReceived.text = "valeur recue : $reception"
+            //setCharacteristicNotificationBle(gatt, characteristic, true)
+            gatt?.setCharacteristicNotification(characteristic, true)
+            if (characteristic.descriptors.size > 0) {
+                val descriptors = characteristic.descriptors
+
+                for (descriptor in descriptors) {
+                    var reception: ByteArray
+
+                    if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
+                        descriptor.value =
+                            if (true) BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                        reception = descriptor.value
+                        characteristic.value = reception
+                    } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
+                        descriptor.value =
+                            if (true) BluetoothGattDescriptor.ENABLE_INDICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                        reception = descriptor.value
+                        characteristic.value = reception
+                    }
+                    gatt?.writeDescriptor(descriptor)
+                    //val valeurRecue = "valeur recue 1 : $reception"
+                    holder.characteristicValueReceived.text = String(characteristic.value)
                 }
+
             }
         }
 
+
     }
+
+    private fun setCharacteristicNotificationBle(
+        gatt: BluetoothGatt?,
+        characteristic: BluetoothGattCharacteristic,
+        enabled: Boolean
+    ) {
+        gatt?.setCharacteristicNotification(characteristic, enabled)
+        if (characteristic.descriptors.size > 0) {
+            val descriptors = characteristic.descriptors
+            for (descriptor in descriptors) {
+                if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
+                    descriptor.value =
+                        if (enabled) BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
+                    descriptor.value =
+                        if (enabled) BluetoothGattDescriptor.ENABLE_INDICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                }
+                gatt?.writeDescriptor(descriptor)
+            }
+        }
+    }
+
 
     override fun onBindGroupViewHolder(
         holder: ServiceViewHolder, flatPosition: Int,
@@ -177,20 +219,17 @@ class BLEServiceAdapter(
 
     }
 
-    /*
-    la classe StringBuilder permet d’améliorer les performances quand il s’agit de concaténer un grand nombre de chaînes dans une boucle.
-     */
 
-    private fun  getProperties (propriete: Int): StringBuilder {
+    private fun getProperties(propriete: Int): StringBuilder {
         val valeur = StringBuilder()
 
-        if (propriete and BluetoothGattCharacteristic.PROPERTY_WRITE != 0){
+        if (propriete and BluetoothGattCharacteristic.PROPERTY_WRITE != 0) {
             valeur.append("WRITE")
         }
-        if (propriete and BluetoothGattCharacteristic.PROPERTY_READ != 0){
+        if (propriete and BluetoothGattCharacteristic.PROPERTY_READ != 0) {
             valeur.append("READ")
         }
-        if (propriete and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0){
+        if (propriete and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
             valeur.append("NOTIFY")
         }
         return valeur

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class CycleVieActivity : AppCompatActivity() {
 
-    private var texteglobal:String = ""
+    private var texteglobal: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycle_vie)
@@ -25,7 +25,7 @@ class CycleVieActivity : AppCompatActivity() {
         etatText.text = texteglobal
     }
 
-   override fun onResume() {
+    override fun onResume() {
         super.onResume()
         texteglobal += "application -> onResume()\n"
         etatText.text = texteglobal

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_web_service.*
 
 class WebServiceActivity : AppCompatActivity() {
 
-    private val url = "https://randomuser.me/api/?inc=name%2Cpicture%2Clocation%2Cemail&noinfo=&nat=fr&format=pretty&results=10"
+    private val url = "https://randomuser.me/api/?nat=fr&results=10"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,9 @@ class WebServiceActivity : AppCompatActivity() {
                 webRecycler.visibility = View.VISIBLE
 
             },
-            Response.ErrorListener { Toast.makeText(this, "That didn't work", Toast.LENGTH_SHORT).show()})
+            Response.ErrorListener {
+                Toast.makeText(this, "That didn't work", Toast.LENGTH_SHORT).show()
+            })
 
         queue.add(stringRequest)
         return jsonString
