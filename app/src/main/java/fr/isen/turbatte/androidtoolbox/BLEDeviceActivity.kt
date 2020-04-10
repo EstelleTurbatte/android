@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_bledevice.*
 class BLEDeviceActivity : AppCompatActivity() {
 
     private var bluetoothGatt: BluetoothGatt? = null
-    private var TAG: String = "MyActivity";
+    private var TAG: String = "MyActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,7 @@ class BLEDeviceActivity : AppCompatActivity() {
 
         val device: BluetoothDevice = intent.getParcelableExtra("ble_device")
         connectToDevice(device)
-        deviceNameTextView.text = device?.name
+        deviceNameTextView.text = device.name
     }
 
     private fun connectToDevice(device: BluetoothDevice?) {
@@ -35,6 +35,26 @@ class BLEDeviceActivity : AppCompatActivity() {
                 }
             }
 
+            override fun onCharacteristicRead(
+                gatt: BluetoothGatt?,
+                characteristic: BluetoothGattCharacteristic?,
+                status: Int
+            ) {
+                super.onCharacteristicRead(gatt, characteristic, status)
+                runOnUiThread {
+                    bleDeviceRecyclerView.adapter?.notifyDataSetChanged()
+
+                }
+            }
+
+            override fun onCharacteristicWrite(
+                gatt: BluetoothGatt?,
+                characteristic: BluetoothGattCharacteristic?,
+                status: Int
+            ) {
+                super.onCharacteristicWrite(gatt, characteristic, status)
+            }
+
             override fun onCharacteristicChanged(
                 gatt: BluetoothGatt?,
                 characteristic: BluetoothGattCharacteristic?
@@ -43,8 +63,10 @@ class BLEDeviceActivity : AppCompatActivity() {
                     TAG,
                     "**THIS IS A NOTIFY MESSAGE" + characteristic?.value + characteristic?.uuid
                 )
+                runOnUiThread {
+                    bleDeviceRecyclerView.adapter?.notifyDataSetChanged()
 
-
+                }
             }
 
             override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {

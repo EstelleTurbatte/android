@@ -34,6 +34,7 @@ class BLEServiceAdapter(
         serviceList
     ) {
 
+    private var notity: Boolean = false
 
     class ServiceViewHolder(itemView: View) : GroupViewHolder(itemView) {
         val serviceName: TextView = itemView.serviceNameTextView
@@ -96,7 +97,7 @@ class BLEServiceAdapter(
         val uuid = "UUID : ${characteristic.uuid}"
         holder.characteristicUUID.text = uuid
 
-        val title = BLEUUIDAttributes.getBLEAttributeFromUUID(characteristic.uuid.toString()).title
+        //val title = BLEUUIDAttributes.getBLEAttributeFromUUID(characteristic.uuid.toString()).title
 
         holder.ReadAction.setBackgroundColor(Color.parseColor("#A0A3A2"))
         holder.NotificationAction.setBackgroundColor(Color.parseColor("#A0A3A2"))
@@ -152,58 +153,41 @@ class BLEServiceAdapter(
             Log.i("erreur Lecture: ", verif.toString())
 
             val reception = String(characteristic.value)
-            val valeurRecue = "valeur recue : $reception"
-            holder.characteristicValueReceived.text = valeurRecue
-        }
-
-        holder.NotificationAction.setOnClickListener {
-            //setCharacteristicNotificationBle(gatt, characteristic, true)
-            gatt?.setCharacteristicNotification(characteristic, true)
-            if (characteristic.descriptors.size > 0) {
-                val descriptors = characteristic.descriptors
-
-                for (descriptor in descriptors) {
-                    var reception: ByteArray
-
-                    if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
-                        descriptor.value =
-                            if (true) BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
-                        reception = descriptor.value
-                        characteristic.value = reception
-                    } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
-                        descriptor.value =
-                            if (true) BluetoothGattDescriptor.ENABLE_INDICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
-                        reception = descriptor.value
-                        characteristic.value = reception
-                    }
-                    gatt?.writeDescriptor(descriptor)
-                    //val valeurRecue = "valeur recue 1 : $reception"
-                    holder.characteristicValueReceived.text = String(characteristic.value)
-                }
-
+            if (reception != null) {
+                val valeurRecue = "valeur recue : $reception"
+                holder.characteristicValueReceived.text = valeurRecue
             }
         }
 
+        holder.NotificationAction.setOnClickListener {
 
-    }
+            if (!notity) {
+                notity = true
+                gatt?.setCharacteristicNotification(characteristic, true)
 
-    private fun setCharacteristicNotificationBle(
-        gatt: BluetoothGatt?,
-        characteristic: BluetoothGattCharacteristic,
-        enabled: Boolean
-    ) {
-        gatt?.setCharacteristicNotification(characteristic, enabled)
-        if (characteristic.descriptors.size > 0) {
-            val descriptors = characteristic.descriptors
-            for (descriptor in descriptors) {
-                if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
-                    descriptor.value =
-                        if (enabled) BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
-                } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
-                    descriptor.value =
-                        if (enabled) BluetoothGattDescriptor.ENABLE_INDICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                if (characteristic.descriptors.size > 0) {
+
+                    val descriptors = characteristic.descriptors
+                    for (descriptor in descriptors) {
+                        if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
+                            descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+                        } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
+                            descriptor.value = BluetoothGattDescriptor.ENABLE_INDICATION_VALUE
+                        }
+                        gatt?.writeDescriptor(descriptor)
+                    }
                 }
-                gatt?.writeDescriptor(descriptor)
+            } else {
+                notity = false
+                gatt?.setCharacteristicNotification(characteristic, false)
+            }
+        }
+        if (characteristic.uuid.toString() == BLEUUIDAttributes.getBLEAttributeFromUUID(characteristic.uuid.toString()).uuid && notity) {
+            if (characteristic.value == null)
+                holder.characteristicValueReceived.text = "Valeur : 0"
+            else {
+                holder.characteristicValueReceived.text =
+                    "Valeur : ${byteArrayToHexString(characteristic.value)}"
             }
         }
     }
@@ -235,5 +219,14 @@ class BLEServiceAdapter(
         return valeur
     }
 
+    private fun byteArrayToHexString(array: ByteArray): String {
+        val result = StringBuilder(array.size * 2)
+        for ( byte in array ) {
+            val toAppend = String.format("%X", byte)
+            result.append(toAppend).append("-")
+        }
+        result.setLength(result.length - 1)
+        return result.toString()
+    }
 
 }

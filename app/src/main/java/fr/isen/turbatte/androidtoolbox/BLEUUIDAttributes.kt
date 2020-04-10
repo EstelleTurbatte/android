@@ -9,8 +9,8 @@ enum class BLEUUIDAttributes(val uuid: String, val title: String) {
     CUSTOM_SERVICE("466c1234-f593-11e8-8eb2-f2801f1b9fd1", "Service Spécifique"),
     DEVICE_NAME("00002a00-0000-1000-8000-00805f9b34fb", "Nom du périphérique"),
     APPEARANCE("00002a01-0000-1000-8000-00805f9b34fb", "Apparance"),
-    CUSTOM_CHARACTERISTIC("466c9abc-f593-11e8-8eb2-f2801f1b9b34fb", "Caractéristique Spécifique"),
-    CUSTOM_CHARACTERISTIC_2("466c9abc-f593-11e8-8eb2-f2801f1b9b34fb", "Caractéristique Spécifique");
+    CUSTOM_CHARACTERISTIC("466c5678-f593-11e8-8eb2-f2801f1b9fd1", "Caractéristique Spécifique"),
+    CUSTOM_CHARACTERISTIC_2("466c9abc-f593-11e8-8eb2-f2801f1b9fd1", "Caractéristique Spécifique");
 
     companion object {
         fun getBLEAttributeFromUUID(uuid: String) =

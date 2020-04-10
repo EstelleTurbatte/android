@@ -1,6 +1,7 @@
 package fr.isen.turbatte.androidtoolbox
 
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.graphics.Color
@@ -20,7 +21,7 @@ class BLEScanAdapter(
     class BLEScanViewHolder(
         scanView: View,
         private val scanResults: ArrayList<ScanResult>,
-        val deviceClickListener: (BluetoothDevice) -> Unit
+        private val deviceClickListener: (BluetoothDevice) -> Unit
     ) :
         RecyclerView.ViewHolder(scanView) {
 
@@ -69,5 +70,6 @@ class BLEScanAdapter(
             scanResults.add(result)
         }
     }
+
 }
 
